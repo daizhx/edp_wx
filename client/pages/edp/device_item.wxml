@@ -1,0 +1,6 @@
+<template name="deviceItem">
+  <view class='device-item' hover-class='press-bg'>
+    <text> {{name}} </text>
+    <text> {{addr}} </text>
+  </view>
+</template>

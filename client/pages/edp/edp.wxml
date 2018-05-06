@@ -1,0 +1,62 @@
+<!--pages/edp/edp.wxml-->
+<view class="page">
+
+  <view id='bt_status_bar'>
+
+    <text style='color:white' bindtap='search_device' data-statu="open">{{dev_status}}</text>
+
+  </view>
+
+  <view class='row'>
+    <picker class='circleBg' range="{{frequency_array}}" value='{{frequency_index}}' bindchange='frequencyChange'>
+
+      <!-- <image style='width:50%; height:50%' src="{{aa}}"></image> -->
+      <text style='color:white'>{{frequency_array[frequency_index]}}</text>
+    </picker>
+
+    <picker class='circleBg' range="{{time_array}}" value='{{time_index}}' bindchange='timeChange'>
+      <text style='color:white'>{{time_array[time_index]}}</text>
+    </picker>
+  </view>
+
+  <view class='row'>
+    <picker class='circleBg' range="{{mc_array}}" value='{{mc_index}}' bindchange='mcChange'>
+      <text style='color:white'>{{mc_array[mc_index]}}</text>
+    </picker>
+
+    <picker class='circleBg' range="{{strength_array}}" value='{{strength_index}}' bindchange='strengthChange'>
+      <text style='color:white'>{{strength_array[strength_index]}}</text>
+    </picker>
+
+  </view>
+
+<view class='row'>
+  <button class='circleBg' type="warn" bindtap="turnOn"> 开机 </button>
+  <button class='circleBg' type="warn" bindtap="turnOff"> 关机 </button>
+</view>
+</view>
+
+
+<!--mask-->
+<view class="drawer_screen" bindtap="close_search_dialog" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">搜索EDP</view>
+  <view style='height:1px;background-color:#00ddff'></view>
+  <scroll-view scroll-y='true' class="drawer_content">
+    <block wx:for="{{device_array}}">
+       <template is="deviceItem" data="{{...item}}"></template> 
+    </block>
+  </scroll-view>
+</view>
+
+
+<template name="deviceItem">
+  <view class='device-item top bottom' hover-class='press-bg' bindtap='connectDevice' data-id="{{deviceId}}">
+    <text style='display:block'> {{name}} </text>
+    <text> {{deviceId}} </text>
+  </view>
+</template>
